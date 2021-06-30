@@ -24,6 +24,13 @@ console.log(enemyNames[3]);
 // * Defeat each enemy robot
 //"LOSE" - PLayer robot's health is zero or less
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+  
+    return value;
+  };
+
 // create function
 var fight = function(enemyName) {
    
@@ -46,12 +53,14 @@ var fight = function(enemyName) {
             }
         }
    
-    //Subtract the value of 'playerAttack' from the value of 'enemyHealth' and use that result to update the value in the 'enemyHealth' variable
-    enemyHealth = Math.max(0, enemyHealth - playerAttack);
+        // generate random damage value based on player's attack power
+        var damage = randomNumber(playerAttack - 3, playerAttack);
 
-    // Log a resulting message to the console so that we know it worked
-    console.log(
-        playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining. "
+        enemyHealth = Math.max(0, enemyHealth - damage);
+
+        // Log a resulting message to the console so that we know it worked
+        console.log(
+            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining. "
     );
 
     // check enemy's health
@@ -67,8 +76,9 @@ var fight = function(enemyName) {
         window.alert(enemyName + " still has " + enemyHealth + " health left.");
     };
 
-    //Subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to update the value in the 'playerHealth' variable.
-    playerHealth = Math.max(0, playerHealth - enemyAttack);
+    // generate random damage value based on enemy's attack power
+    var damage = randomNumber(enemyAttack - 3, enemyAttack);
+    playerHealth = Math.max(0, playerHealth - damage);
 
     // Log a resulting message to the console so that we know it worked
     console.log(
@@ -106,7 +116,7 @@ var startGame = function(){
             var pickedEnemyName = enemyNames[i];
 
             // reset enemyHealth before starting new fight 
-            enemyHealth = Math.floor(Math.random() * 21) + 40;
+            enemyHealth = randomNumber(40, 60);
 
              //use debugger to pause script from running and check what's going on at that moment in the code
             //debugger;
@@ -204,7 +214,7 @@ var shop = function() {
 
             // do nothing, so function will end
             break;
-        default:
+            default:
             window.alert("You did not pick a valid option. Try again.");
 
             //call shop() again to force player to pick a valid option
