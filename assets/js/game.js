@@ -113,6 +113,11 @@ var startGame = function(){
 
             // pass the pickedEnemyName variable's value into the fight function where it will assume the value of the enemyName parameter
             fight(pickedEnemyName);
+
+            // if player is still alive and we're not at the last enemy in the array
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                shop();
+            }
         } 
         else {
             window.alert("You have lost your robot in battle! Game Over!");
@@ -146,6 +151,13 @@ var endGame = function() {
 };
 // execute function
 // fight();
+
+
+var shop = function() {
+    console.log("Entered the shop.");
+};
+
+
 
 //start the game when the page loads
 startGame();
